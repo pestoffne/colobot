@@ -156,11 +156,17 @@ std::wstring StrUtils::Utf8StringToUnicode(const std::string &str)
 {
     std::wstring result;
     unsigned int pos = 0;
+    int len;
     while (pos < str.size())
     {
-        int len = StrUtils::Utf8CharSizeAt(str, pos);
-        if (len == 0)
+        try
+        {
+            len = StrUtils::Utf8CharSizeAt(str, pos);
+        }
+        catch (std::out_of_range &e)
+        {
             break;
+        }
 
         std::string ch = str.substr(pos, len);
         result += static_cast<wchar_t>(StrUtils::Utf8CharToUnicode(ch));
@@ -172,15 +178,17 @@ std::wstring StrUtils::Utf8StringToUnicode(const std::string &str)
 int StrUtils::Utf8CharSizeAt(const std::string &str, unsigned int pos)
 {
     if (pos >= str.size())
-        return 0;
+        throw std::out_of_range("Index out of range");
 
     const char c = str[pos];
-    if((c & 0xF8) == 0xF0)
-        return 4;
-    if((c & 0xF0) == 0xE0)
-        return 3;
-    if((c & 0xE0) == 0xC0)
+    if((c & 0b1000'0000) == 0b0000'0000)
+        return 1;
+    if((c & 0b1110'0000) == 0b1100'0000)
         return 2;
+    if((c & 0b1111'0000) == 0b1110'0000)
+        return 3;
+    if((c & 0b1111'1000) == 0b1111'0000)
+        return 4;
 
     return 1;
 }
@@ -199,5 +207,5 @@ std::size_t StrUtils::Utf8StringLength(const std::string &str)
 
 bool StrUtils::isUtf8ContinuationByte(char c)
 {
-    return (c & 0b11'000000) == 0b10'000000;
+    return (c & 0b1100'0000) == 0b1000'0000;
 }
