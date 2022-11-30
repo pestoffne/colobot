@@ -22,7 +22,7 @@ Steps in this section needs to be done only once. After this, you can basically 
 
 #### Installation of MSYS2
 
-Read this page really carefully: <http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/> . By following it, you should install and configure MSYS2 without major problems.
+Read this page really carefully: <https://www.msys2.org/> . By following it, you should install and configure MSYS2 without major problems.
 
 #### TIP
 When you face any problems during this guide or anywhere in the future, the first thing you should do is to close all MSYS2 processes and run `autorebase.bat` script (it's in the main MSYS2 folder), especially after installation and updating. If you don't do it, odd problems might appear, like CMake not detecting GCC.
@@ -110,14 +110,14 @@ Easy, isn't it?
 If you are lazy, you can just use this one-line command, although there is no guarantee it will work or install everything (might be out of date):
 
 ```sh
-pacman -S mingw-w64-i686-boost mingw-w64-i686-glew mingw-w64-i686-libpng gettext mingw-w64-i686-gettext mingw-w64-i686-libpng mingw-w64-i686-libsndfile mingw-w64-i686-libvorbis mingw-w64-i686-libogg mingw-w64-i686-openal mingw-w64_i686-physfs mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_image mingw-w64-i686-SDL2_ttf
+pacman -S mingw-w64-i686-boost mingw-w64-i686-glew mingw-w64-i686-libpng gettext mingw-w64-i686-gettext mingw-w64-i686-libpng mingw-w64-i686-libsndfile mingw-w64-i686-libvorbis mingw-w64-i686-libogg mingw-w64-i686-openal mingw-w64-i686-physfs mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_image mingw-w64-i686-SDL2_ttf
 ```
 
 You should now have everything set up and working. You can close all instances of MSYS2 and autorebase to ensure everything installed properly.
 
 ### Compilation of GOLD
 
-You could say that you have a small Linux inside of your Windows right now. To compile GOLD just follow the instructions for Linux that are available in the repository (https://github.com/colobot/colobot/blob/dev/INSTALL.md\#compiling-on-linux).
+You could say that you have a small Linux inside of your Windows right now. To compile GOLD just follow the instructions for Linux that are available in the repository (https://github.com/colobot/colobot/blob/dev/INSTALL.md#compiling-on-linux).
 
 **Warning:** You must add `-G"MSYS Makefiles"` argument to `cmake`. For example, when you want to build a developer version:
 
